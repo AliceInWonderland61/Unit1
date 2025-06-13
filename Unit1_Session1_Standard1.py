@@ -144,57 +144,41 @@ def split_haycorns(quantity):
 #Problem 11: T-I-Double Guh-ER
 #Signs in the Hundred Acre Wood have been losing letters as Tigger bounces around stealing any letters he needs to spell out his name. 
 # Write a function tiggerfy() that accepts a string s, and returns a new string with the letters t, i, g, e, and r removed from it.
+def tiggerfy(s):
+    skip={'t','i','g','e', 'r', 'T','I','G', 'E', 'R' }
+    new_word=""
+
+    for letter in s:
+        if letter not in skip:
+            new_word+=letter
+    return new_word
+
+#Problem 12: Thistle Hunt
+#Pooh, Piglet, and Roo are looking for thistles to gift their friend Eeyore. 
+# Write a function locate_thistles() that takes in a list of strings items and returns a list of the indices of any elements with value "thistle". 
+# The indices in the resulting list should be ordered from least to greatest.
+
+def locate_thistles(items):
+    locations=[]
+    keyword="thistle"
+    #need to pass both the index and value so we can keep track of both
+    #index is the location where it's at and the value is what the index contains at that particular location 
+    for index, value in enumerate (items):
+        #if the value we're currently at matches the keyword we're looking for
+        if value in keyword:
+            #we add the index to our list
+            #this will keep happening everytime we come across the keyword 
+            locations.append(index)
+    return locations
+
 
 
 def main():
-    greeting("Alissen")
-    items=["piglet", "pooh", "roo", "rabbit"]
-    print(get_item(items, 2))
+    items = ["thistle", "stick", "carrot", "thistle", "eeyore's tail"]
+    print(locate_thistles(items))
 
-    print_catchphrase("Pooh")
-    print_catchphrase("Tigger")
-    print_catchphrase("Eeyore")
-    print_catchphrase("Christopher Robin")
-    print_catchphrase("random")
-
-    hunny_jars = [2, 3, 4, 5, 16]
-    sum_honey(hunny_jars)
-
-    hunny_jars = [1,2,0]
-    sum_honey(hunny_jars)
-
-    hunny_jars = [1, 2, 3]
-    doubled(hunny_jars)
-
-    race_times = [1, 2, 3, 4, 5, 6]
-    threshold = 4
-    count_less_than(race_times, threshold)
-
-    race_times = []
-    threshold = 4
-    count_less_than(race_times, threshold)
-
-    task = ["Count all the bees in the hive", "Chase all the clouds from the sky", "Think", "Stoutness Exercises"]
-    print_todo_list(task)
-
-    task = []
-    print_todo_list(task)
-
-
-    item_quantities = [2, 4, 6, 8]
-    can_pair(item_quantities)
-
-    item_quantities = [1, 2, 3, 4]
-    can_pair(item_quantities)
-
-    item_quantities = []
-    can_pair(item_quantities)
-
-    quantity = 6
-    print(split_haycorns(quantity))
-
-    quantity = 1
-    print(split_haycorns(quantity))
+    items = ["book", "bouncy ball", "leaf", "red balloon"]
+    print(locate_thistles(items))
 
 
 
