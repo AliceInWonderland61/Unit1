@@ -51,21 +51,94 @@ def concatenate(words):
     print(completed_word)
 
 
+#Problem 6: Squared
+#Write a function squared() that accepts a list of integers numbers as a parameter and squares each item in the list. 
+#Return the squared list.
+
+def squared(numbers):
+    #if it's a list you can append
+    squared_nums=[]
+    for i in numbers:
+        squared_nums.append(i*i)
+    print(squared_nums)
+
+
+#Problem 7: NaNaNaBatman
+#Write a function nanana_batman() that accepts an integer x and prints the string "nanana batman!" where "na" is repeated x times. Do not use the * operator.
+
+def nanana_batman(x):
+    repeated=""
+    counter=0
+    while counter<x:
+        #since we have a string named repeated then we can keep adding 'na' each time the loop executes
+        #it will loop x times 
+        repeated+="na"
+        #increment counter 
+        counter+=1
+    print(f"{repeated} batman!")
+
+
+#Problem 8: Find the Villain
+#Write a function find_villain() that accepts a list crowd and a value villain as parameters and returns a list of all indices where the villain is found hiding in the crowd.
+
+def find_villain(crowd, villain):
+    #create a list to save the indexes 
+    found_villains=[]
+    #we're looking at the values and the index of the list we received (crowd)
+    for index, value in enumerate(crowd):
+        #if the current value we are at is equal to the villain then we save the index to our list 
+        if value==villain:
+            found_villains.append(index)
+    print(found_villains)
+
+
+#Problem 9: Odd
+#Write a function get_odds() that takes in a list of integers nums and returns a new list containing all the odd numbers in nums.
+
+def get_odds(nums):
+    odds_only=[]
+
+    for i in nums:
+        if i%2!=0:
+            odds_only.append(i)
+    print(odds_only)
 
 
 
+#Problem 10: Up and Down
+#Write a function up_and_down() that accepts a list of integers lst as a parameter. 
+# The function should return the number of odd numbers minus the number of even numbers in the list.
+
+def up_and_down(lst):
+    odds_only=0
+    evens_only=0
+
+    for i in lst:
+        if i%2==0:
+            evens_only+=1
+        else:
+            odds_only+=1
+    print(odds_only-evens_only)
 
 
+#Problem 11: Running Sum
+#Write a function running_sum() that accepts a list of integers superhero_stats representing the number of crimes Batman has stopped each month in Gotham City. 
+# The function should modify the list to return the running sum such that superhero_stats[i] = sum(superhero_stats[0]...superhero_stats[i]). 
+# You must modify the list in place; you may not create any new lists as part of your solution.
 
-
+def running_sum(superhero_stats):
+    
 
 
 def main():
-    words = ["vengeance", "darkness", "batman"]
-    concatenate(words)
+    lst = [1, 2, 3]
+    up_and_down(lst)
 
-    words = []
-    concatenate(words)
+    lst = [1, 3, 5]
+    up_and_down(lst)
+
+    lst = [2, 4, 10, 2]
+    up_and_down(lst)
 
 
 main()
