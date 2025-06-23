@@ -153,5 +153,125 @@ def num_popular_pairs(popularity_scores):
 # For example, [3, 1, 2] and [2, 1 , 3] are both permutations of the list [1, 2, 3].
 #Hint: Absolute value function
 
+
+#essentially we need to find where they're repeated and get the difference from those two places
+#if alice is in 0 from the s index and 3 from the t index then the absolute difference is 3
+#if bob is in 1 from the s index and 2 in the t index then the absolute difference is 1 etc
 def find_stage_arrangement_difference(s, t):
+    s_dict={}
+    t_dict={}
+    #my idea was to create two dictionaries-one for each string 
+    # and then use another for loop to find the repeated ones 
+    for index in range(len(s)):
+        s_dict[s[index]]=index
+        t_dict[t[index]]=index
     
+    total_difference=0
+    #we're looking at the performers now and getting where we find them 
+    #then using absolute value we find the difference between the two (if there's any)
+    for performer in s:
+        index_s=s_dict[performer]
+        index_t=t_dict[performer]
+        total_difference+=abs(index_s-index_t)
+    return total_difference
+
+
+#Problem 10: You're given strings vip_passes representing the types of guests that have VIP passes, and guests representing the guests you have at the music festival. 
+# Each character in guests is a type of guest you have. 
+# You want to know how many of the guests you have are also VIP pass holders.
+#Letters are case sensitive, so "a" is considered a different type of guest from "A".
+#Here is the pseudocode for the problem. Implement this in Python and explain your implementation step-by-step.
+
+'''
+1. Create an empty set called vip_set.
+2. For each character in vip_passes, add it to vip_set.
+3. Initialize a counter variable to 0.
+4. For each character in guests:
+   * If the character is in vip_set, increment the count by 1.
+5. Return the count.
+'''
+
+def num_VIP_guests(vip_passes, guests):
+    #set is a keyword that basically gets each letter and makes it into a character but it removes the repeated ones
+    vip_set=set(vip_passes)
+    count=0
+    for i in guests:
+        #if the current letter we're processing from guest is in the vip_set then we increment our counter
+        if i in vip_set:
+            count+=1
+    #return how many vip passes we found 
+    return count
+
+
+#Problem 11: Performer Schedule Pattern
+#Given a string pattern and a string schedule, return True if schedule follows the same pattern. Return False otherwise.
+#Here, "follow" means a full match, such that there is a one-to-one correspondence between a letter in pattern and a non-empty word in schedule.
+#You are provided with a partially implemented and buggy version of the solution. Identify and fix the bugs in the code. 
+# Then, perform a thorough code review and suggest improvements.
+
+def schedule_pattern(pattern, schedule):
+    
+    genres = schedule.split()
+
+    if len(genres) != len(pattern):
+        return False
+
+    char_to_genre = {}
+    genre_to_char = {}
+
+    for char, genre in zip(pattern, genres):
+        if char in char_to_genre:
+            if char_to_genre[char] != genre:
+                return False
+        else:
+            char_to_genre[char] = genre
+
+        if genre in genre_to_char:
+            if genre_to_char[genre] != char:
+                return False
+        else:
+            genre_to_char[genre] = char
+
+    return True
+
+
+#Problem 12: Sort the Performers
+#You are given an array of strings performer_names, and an array performance_times that consists of distinct positive integers representing the performance durations in minutes. 
+# Both arrays are of length n.
+#For each index i, performer_names[i] and performance_times[i] denote the name and performance duration of the ith performer.
+#Return performer_names sorted in descending order by the performance durations.
+
+#ok so my idea is to make a dictionary and save the performer as the key and the time they perform as their value 
+#this will be done by using a for loop 
+#then I can find ways to sort the dictionary in descending order
+
+def sort_performers(performer_names, performance_times):
+
+    dictionary={}
+
+    for i in range (len(performer_names)):
+        #for this specific perfomer i we'll assign the time i from the performance_times
+        dictionary[performer_names[i]]=performance_times[i]
+
+        #now we sort 
+        #key=lambda x: x[1] basically means we want to sort by the second thing in each item 
+        #if we have key:Alice and value:756
+        #we want to sort by the second thing in that item which will be the value so 1 
+        #since we want it in descending order we need to add 'reverse=True' 
+        #ususally it sorts by ascending but we want it the other way around hence 'reverse'
+    dict_sorted=sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
+    #let's go through the sorted list and get only the first element from the pair since we really only want the names (keys)
+    return [pair[0] for pair in dict_sorted]
+
+
+performer_names1 = ["Mary", "John", "Emma"]
+performance_times1 = [180, 165, 170]
+
+performer_names2 = ["Alice", "Bob", "Bob"]
+performance_times2 = [155, 185, 150]
+
+print(sort_performers(performer_names1, performance_times1)) 
+print(sort_performers(performer_names2, performance_times2))
+        
+
+
