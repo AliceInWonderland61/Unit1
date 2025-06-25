@@ -60,15 +60,48 @@ def check_oxygen_levels(oxygen_levels, min_val, max_val):
     return my_list
 
 
-oxygen_levels = {
-    "Command Module": 21,
-    "Habitation Module": 20,
-    "Laboratory Module": 19,
-    "Airlock": 22,
-    "Storage Bay": 18
-}
+#Problem 4:  Experiment Analysis
+#Write a function data_difference() that accepts two dictionaries experiment1 and experiment2 and 
+# returns a new dictionary that contains only key-value pairs found exclusively in experiment1 but not in experiment2.
 
-min_val = 19
-max_val = 22
 
-print(check_oxygen_levels(oxygen_levels, min_val, max_val))
+def data_difference(experiment1, experiment2):
+    only_one={}
+
+    for data in experiment1:
+        #if this specific data is not in experiment2
+        #so we also compare everything not just the key 
+        if data not in experiment2 or experiment1[data]!=experiment2[data]:
+            #then we add it to our dictionary 
+            only_one[data]=experiment1[data]
+    return only_one
+
+
+
+#Problem 5: Name the Node
+#NASA has asked the public to vote on a new name for one of the nodes in the International Space Station. 
+# Given a list of strings votes where each string in the list is a voter's suggested new name, 
+# implement a function get_winner() that returns the suggestion with the most number of votes.
+#If there is a tie, return either option.
+
+def get_winner(votes):
+    voters={}
+    for i in votes:
+        if i in voters:
+            voters[i]+=1
+        else:
+            voters[i]=1
+
+    ascending=sorted(voters.items(), key=lambda x: x[1], reverse=True)
+    #ascening is treating this like a list so we need to output [0][0]
+    #first [0] is the first item they have in the list
+    #second [0]is now going into the items (there's 2 name and vote) and get the first item which is the name 
+    return ascending[0][0]
+
+#Problem 6: Check if the Transmission is Complete
+#Ground control has sent a transmission containing important information. 
+# A complete transmission is one where every letter of the English alphabet appears at least once.
+#Given a string transmission containing only lowercase English letters, return true if the transmission is complete, or false otherwise.
+
+def check_if_complete_transmission(transmission):
+    
