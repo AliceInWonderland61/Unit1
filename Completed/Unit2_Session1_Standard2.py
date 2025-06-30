@@ -104,4 +104,120 @@ def get_winner(votes):
 #Given a string transmission containing only lowercase English letters, return true if the transmission is complete, or false otherwise.
 
 def check_if_complete_transmission(transmission):
+
+  
+    #so my thought process is to have the alphabet in a string and if we come across one of the letters we remove them
+    alphabet=['a','b','c','d','e','f','g','h', 'i', 'j','k', 'l', 'm','n','o','p','q','r','s','t','u','v', 'w', 'x', 'y', 'z']
+    #we start traversing the transmission and checking if that's in our alphabet
+    for i in transmission:
+        #if that char is in the alphabet we remove it from our alphabet
+        if i in alphabet:
+            alphabet.remove(i)
+    #if the length of our alpbhabet is not zero then that means not all the letter of the alphabet were used in the string 
+    if len(alphabet) !=0:
+        return False
+    return True
+
+
+#Problem 7: Signal Pairs
+#Ground control is analyzing signal patterns received from different probes. 
+# You are given a 0-indexed array signals consisting of distinct strings.
+#The string signals[i] can be paired with the string signals[j] if the string signals[i] is equal to the reversed string of signals[j]. 0 <= i < j < len(signals). 
+# Return the maximum number of pairs that can be formed from the array signals.
+#Note that each string can belong in at most one pair.
+
+def max_number_of_string_pairs(signals):
+    #so my idea is to create a dictionary and save the first string we see as the key and the reverse of it will be assigned as it's key
+    #the next string we'll check our dictionary to see if it;s a key or a value 
+    #if it's a new key we add it to our dictionary 
+    #if it's a value then we increment our counter
+
+    #create a dictionary to save the ones we've seen so far
+    seen={} 
+    #counter to count how many valid pairs we find 
+    counter=0
+    for i in signals:
+        #reverse the current string we're at and save it to rev
+        rev=i[::-1]
+        #if that reverse string is in our dictionary then we increment our counter
+        if rev in seen:
+            counter+=1
+            #delete that string so that we avoid reusing it 
+            del seen[rev]
+        else:
+            seen[i]=True
+    return counter
+
+#Problem 8: Find the Difference of Two Signal Arrays
+#You are given two 0-indexed integer arrays signals1 and signals2, representing signal data from two different probes. 
+# Return a list answer of size 2 where:
+#answer[0] is a list of all distinct integers in signals1 which are not present in signals2.
+#answer[1] is a list of all distinct integers in signals2 which are not present in signals1.
+#Note that the integers in the lists may be returned in any order.
+#Below is the pseudocode for the problem. Implement this in Python and explain your implementation step-by-step.
+'''
+1. Convert signals1 and signals2 to sets.
+2. Find the difference between set1 and set2 and store it in diff1.
+3. Find the difference between set2 and set1 and store it in diff2.
+4. Return the list [diff1, diff2].
+'''
+
+def find_difference(signals1, signals2):
+    #convert signals1 and signals2 to sets
+    set1=set(signals1)
+    set2=set(signals2)
+
+    #Find the difference between set1 and set2 and store it in diff1
+    diff1=list(set1-set2)
+
+    #Find the difference between set2 and set1 and store it in diff2
+    diff2=list(set2-set1)
+
+    #Return the list [diff1,diff2]
+    return [diff1, diff2]
+
+
+
+#Problem 9: Common Signals Between Space Probes
+#Two space probes have collected signals represented by integer arrays signals1 and signals2 of sizes n and m, respectively. 
+#Calculate the following values:
+#answer1: the number of indices i such that signals1[i] exists in signals2.
+#answer2: the number of indices j such that signals2[j] exists in signals1.
+#Return [answer1, answer2].
+
+def find_common_signals(signals1, signals2):
+    #make them into sets 
+    set1=set(signals1)
+    set2=set(signals2)
+
+    #counter to keep track of how many items in signals1 appear in signals2
+    counter1=0
+    for i in signals1:
+        if i in set2:
+            counter1+=1
+
+    #counter to keep track of how many times in signals2 appear in signals1
+    counter2=0
+    for i in signals2:
+        if i in set1:
+            counter2+=1
     
+    return [counter1, counter2]
+
+
+#Problem 10: Common Signals Between Space Probes II
+#If you implemented find_common_signals() in the previous problem using dictionaries, 
+# try implementing find_common_signals() again using sets instead of dictionaries. 
+# If you implemented find_common_signals() using sets, use dictionaries this time.
+#Once you've come up with your second solution, compare the two. 
+# Is one solution better than the other? How so? Why or why not?
+
+#so i did sets before, I can do two dictionaries instead of sets and use two counters and return those 
+def find_common_signals(signals1, signals2):
+    dict_1={}
+    dict2={}
+
+    
+
+
+
